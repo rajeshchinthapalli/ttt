@@ -1,0 +1,143 @@
+package com.example.cal112;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+public class MainActivity extends AppCompatActivity implements
+View.OnClickListener {
+Button nine, eight, seven, six, five, four, three, two, one, plus, minus,
+multiply, division, module,equal, zero, dot, clear;
+EditText res;
+String operatorPressed = " ";
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+res = findViewById(R.id.res);
+zero = findViewById(R.id.zero);
+one = findViewById(R.id.one);
+two = findViewById(R.id.two);
+three = findViewById(R.id.three);
+four = findViewById(R.id.four);
+five = findViewById(R.id.five);
+six = findViewById(R.id.six);
+seven = findViewById(R.id.seven);
+eight = findViewById(R.id.eight);
+nine = findViewById(R.id.nine);
+plus = findViewById(R.id.plus);
+minus = findViewById(R.id.minus);
+multiply = findViewById(R.id.mulitply);
+division = findViewById(R.id.divide);
+module=findViewById(R.id.module);
+dot = findViewById(R.id.dot);
+equal = findViewById(R.id.equal);
+clear = findViewById(R.id.clear);
+zero.setOnClickListener(this);
+one.setOnClickListener(this);
+two.setOnClickListener(this);
+three.setOnClickListener(this);
+four.setOnClickListener(this);
+five.setOnClickListener(this);
+six.setOnClickListener(this);
+seven.setOnClickListener(this);
+eight.setOnClickListener(this);
+nine.setOnClickListener(this);
+plus.setOnClickListener(this);
+minus.setOnClickListener(this);
+multiply.setOnClickListener(this);
+division.setOnClickListener(this);
+module.setOnClickListener(this);
+dot.setOnClickListener(this);
+equal.setOnClickListener(this);
+clear.setOnClickListener(this);
+}
+@Override
+public void onClick(View view) {
+double finalRes = 0.0;
+switch (view.getId()) {
+case R.id.zero:
+res.append("0");
+break;
+case R.id.one:
+res.append("1");
+break;
+case R.id.two:
+res.append("2");
+break;
+case R.id.three:
+res.append("3");
+break;
+case R.id.four:
+res.append("4");
+break;
+case R.id.five:
+res.append("5");
+break;
+case R.id.six:
+res.append("6");
+break;
+case R.id.seven:
+res.append("7");
+break;
+case R.id.eight:
+res.append("8");
+break;
+case R.id.nine:
+res.append("9");
+break;
+case R.id.plus:
+res.append("+");
+operatorPressed = "+";
+break;
+case R.id.minus:
+res.append("-");
+operatorPressed = "-";
+break;
+case R.id.multiply:
+res.append("*");
+operatorPressed = "*";
+break;
+case R.id.divide:
+res.append("/");
+operatorPressed = "/";
+break;
+case R.id.module:
+res.append("%");
+operatorPressed = "%";
+break;
+case R.id.dot:
+res.append(".");
+break;
+case R.id.equal:
+finalRes =
+(double) evaluate(res.getText().toString(),
+operatorPressed);
+res.setText(String.valueOf(finalRes));
+break;
+case R.id.clear:
+res.setText(" ");
+break;
+}
+}
+private Object evaluate(String toString, String operatorPressed) {
+String[] tokens;
+tokens = toString.split("\\+|-|\\*|\\/|%");
+double firstOperand = Double.parseDouble(tokens[0]);
+double secondOperand = Double.parseDouble(tokens[1]);
+switch (operatorPressed) {
+case "+":
+return firstOperand + secondOperand;
+case "-":
+return firstOperand - secondOperand;
+case "*":
+return firstOperand * secondOperand;
+case "/":
+return firstOperand / secondOperand;
+case "%":
+return firstOperand % secondOperand;
+default:
+return 0;
+}
+}
+}
